@@ -1,0 +1,36 @@
+﻿
+/* Navbar rengi (beyaz) ve gölge efekti */
+
+    /* Navbar içindeki linklerin yazı rengi (gri) */
+.img-behind-text {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    min-width: 200px;
+}
+
+.list-item {
+    margin-bottom: 5px;
+}
+.form-check-label {
+    padding-left: 0; /* Checkbox'ların sola yaslanması için */
+}

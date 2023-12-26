@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Gerekli başlık, stil ve diğer meta etiketleri buraya gelecek -->
+    <title>@ViewBag.Title - ASP.NET Uygulamanız</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm ">
+        <div class="navbar-collapse d-sm-inline-flex justify-content-between" id="navbar">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    @Html.ActionLink("BilgiAkademi", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Hakkinda", "Hakkinda", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Iletisim", "Iletisim", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="kategoriDropdownButton">MENU</a>
+                    <div class="submenu" style="display: none;">
+                        <ul id="kategoriDropdownList"></ul>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Üye Ol", "UyeOl", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Giriş", "Giris", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+            </ul>
+        </div>
+    </nav>
+  
+    
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BİLGİ AKADEMİ</p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+    <script>
+    $(document).ready(function () {
+        $('#kategoriDropdownButton').click(function (e) {
+            e.preventDefault();
+
+            // Kategorileri çek ve dropdown listesine ekle
+            $.ajax({
+                url: '@Url.Action("GetKategoriler", "Kategori")',
+                method: 'GET',
+                success: function (data) {
+                    $('#kategoriDropdownList').empty();
+
+                    $.each(data, function (index, item) {
+                        $('#kategoriDropdownList').append('<li><a href="#" onclick="GetTurler(' + item.kategoriID + ')">' + item.kategoriAd + '</a></li>');
+                    });
+
+                    // Dropdown listesini göster
+                    $('.submenu').slideDown(300);
+                },
+                error: function () {
+                    alert('Kategoriler getirilirken bir hata oluştu.');
+                }
+            });
+        });
+
+        // Turleri getirme fonksiyonu
+        function GetTurler(kategoriID) {
+            $.ajax({
+                url: '@Url.Action("GetTurlerByKategori", "Tur")',
+                method: 'GET',
+                data: { kategoriID: kategoriID },
+                success: function (data) {
+                    // Tur listesini ekrana ekle veya başka bir işlem yapabilirsiniz
+                    $('#turListesi').empty();
+                    $.each(data, function (index, item) {
+                        $('#turListesi').append('<p>' + item.turAd + '</p>');
+                    });
+                },
+                error: function () {
+                    alert('Turler getirilirken bir hata oluştu.');
+                }
+            });
+        }
+
+    });
+        
+
+    </script>
+
+</body>
+</html>

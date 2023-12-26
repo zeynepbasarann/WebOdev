@@ -1,0 +1,27 @@
+﻿@model WebApplication1.Models.Urun
+
+<div style="text-align: center; background-color: #c2c9d6; font-family: serif; color: #707274; height: 300px;">
+    <div style="float: left; margin-right: 20px;">
+        @if (!string.IsNullOrEmpty(Model.Resim) && System.IO.File.Exists(Server.MapPath("~/Content/" + Model.Resim)))
+        {
+            <img src="@Url.Content("~/Content/" + Model.Resim)" alt="@Model.egitimAd" width="150" height="150" />
+        }
+        else
+        {
+            <p>Resim Bulunamadı</p>
+        }
+    </div>
+    <div style="float: left; text-align: left;">
+        <h3>@Model.egitimAd</h3>
+        <p>Yazar: @Model.yazarID</p>
+        <p>Dil: @Model.dilID</p>
+        <p>Ücret: @Model.ucret</p>
+
+        @using (Html.BeginForm("SepeteEkle", "Home", new { urunId = Model.UrunId }, FormMethod.Post))
+        {
+            <input type="submit" value="Sepete Ekle" style="background-color:#a2adb9; border-color:#c2c9d6" />
+        }
+        <button type="button" style="background-color:#a2adb9; border-color:#c2c9d6">Favorilere Ekle</button>
+    </div>
+    <div style="clear: both;"></div>
+</div>

@@ -1,0 +1,34 @@
+﻿@model WebApplication1.Models.Uye
+
+@{
+    ViewBag.Title = "Üye Ol";
+}
+
+<h2>Üye Ol</h2>
+
+@using (Html.BeginForm("UyeOl", "Uye", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ad)
+        @Html.TextBoxFor(model => model.Ad, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Soyad)
+        @Html.TextBoxFor(model => model.Soyad, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.mail)
+        @Html.TextBoxFor(model => model.mail, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sifre)
+        @Html.PasswordFor(model => model.Sifre, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Üye Ol</button>
+}

@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebApplication1.Models.Kategori
+<h2>KategoriEkle</h2>
+@using (Html.BeginForm("kategoriEkle", "Kategori", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.kategoriAd, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.kategoriAd, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.kategoriAd, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="kategoriEkle" class="btn btn-primary" />
+    </div>
+
+}

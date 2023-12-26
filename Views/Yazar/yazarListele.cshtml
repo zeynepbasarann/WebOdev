@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<WebApplication1.Models.Yazar>
+
+<h2>Yazar Listesi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Yazar Adı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var yazar in Model)
+        {
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Guncelle", "Yazar", new { id = yazar.yazarID }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => yazar.yazarID)
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.EditorFor(model => yazar.yazarAd, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => yazar.yazarAd, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Sil", "Yazar", new { id = yazar.yazarID })" class="btn btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

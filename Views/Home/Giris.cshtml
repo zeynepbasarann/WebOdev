@@ -1,0 +1,16 @@
+﻿@model WebApplication1.Models.Uye
+<div style="margin-top: 20px;">
+    <!-- Adjust the margin-top value according to your preference -->
+
+    <form method="post" asp-action="Giris">
+        <label for="mail">E-POSTA:</label>
+        <input type="text" id="mail" name="mail" required />
+
+        <label for="sifre">Şifre:</label>
+        <input type="password" id="Sifre" name="Sifre" required />
+
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    <span asp-validation-summary="All" class="text-danger"></span>
+</div>

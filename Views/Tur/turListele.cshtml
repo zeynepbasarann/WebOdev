@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<WebApplication1.Models.Tur>
+
+<h2>Tur Listesi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kategori Adı</th>
+            <th>Tur Adı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tur in Model)
+        {
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Guncelle", "", new { id = tur.turID }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => tur.turID)
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.DisplayFor(model => tur.Kategori.kategoriAd)
+                            </div>
+                        </div>
+                    }
+                </td>
+
+                <td>
+                    @using (Html.BeginForm("Guncelle", "", new { id = tur.turID }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => tur.turID)
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.EditorFor(model => tur.turAd, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => tur.turAd, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Sil", "Kategori", new { id = tur.turID })" class="btn btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

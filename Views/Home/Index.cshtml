@@ -1,0 +1,23 @@
+﻿
+<div style="text-align: center;">
+    <img src="~/Content/ANA.jpg" alt="Top Image" style="max-width: 100%; height: auto;">
+</div>
+@model List<WebApplication1.Models.Tur>
+
+
+
+<div style="text-align: center; background-color: #c2c9d6 ; font-family: serif; color:#707274; height: 300px;">
+    <h1>ALANINI SEÇ</h1>
+    @foreach (var tur in Model)
+    {
+        <div style="border: 1px solid #707274; padding: 10px; margin: 10px; display: inline-block;">
+            <h3><a href="@Url.Action("urunGosterme", "Home", new { turID = tur.turID })"style="color: #94747a; text-decoration: none;">@tur.turAd</a></h3>
+            <!-- Diğer kategori özelliklerini göstermek için uygun HTML ekleyin -->
+        </div>
+    }
+
+    
+</div>
+
+
+

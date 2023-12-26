@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<WebApplication1.Models.Dil>
+
+<h2>Dil Listesi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Dil Adı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dil in Model)
+        {
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Guncelle", "Dil", new { id = dil.dilID }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => dil.dilID)
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.EditorFor(model => dil.dilAd, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => dil.dilAd, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Sil", "Dil", new { id = dil.dilID })" class="btn btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

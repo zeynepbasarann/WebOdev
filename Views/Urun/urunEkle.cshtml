@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebApplication1.Models.Urun
+<h2>EgitimEkle</h2>
+@using (Html.BeginForm("urunEkle", "Urun", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.egitimAd, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.egitimAd, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.egitimAd, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.turID, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.turID, (SelectList)ViewData["Turler"], "Tur Seçiniz", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.turID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.dilID, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.dilID, (SelectList)ViewData["Diller"], "Dil Seçiniz", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.dilID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.yazarID, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.yazarID, (SelectList)ViewData["Yazarlar"], "Yazar Seçiniz", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.yazarID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ucret, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ucret, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ucret, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Resim", htmlAttributes: new { @class = "control-label" })
+        <input type="file" name="resimFile" />
+    </div>
+
+
+
+
+
+
+
+    <div class="form-group">
+        <input type="submit" value="Ekle" class="btn btn-primary" />
+    </div>
+
+
+
+
+
+}

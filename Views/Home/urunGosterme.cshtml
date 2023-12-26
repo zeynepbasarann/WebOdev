@@ -1,0 +1,17 @@
+﻿@foreach (var urun in Model)
+{
+    <div style="border: 1px solid #707274; padding: 10px; margin: 10px; display: inline-block; background-color: #b7acae; width: 200px;">
+        @if (!string.IsNullOrEmpty(urun.Resim) && System.IO.File.Exists(Server.MapPath("~/Content/" + urun.Resim)))
+        {
+            <img src="@Url.Content("~/Content/" + urun.Resim)" alt="@urun.egitimAd" width="150" height="150" />
+        }
+        else
+        {
+            <p>Resim Bulunamadı</p>
+        }
+        <h3>@urun.egitimAd</h3>
+        <p>Ücret: @urun.ucret</p>
+        <!-- Diğer ürün özelliklerini göstermek için uygun HTML ekleyin -->
+        <a href="@Url.Action("UrunDetay", "Home", new { urunId = urun.UrunId })"style="color: #94747a; text-decoration: none;">İNCELE</a>
+    </div>
+}
